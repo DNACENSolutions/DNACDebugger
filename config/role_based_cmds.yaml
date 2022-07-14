@@ -1,0 +1,232 @@
+areas:
+    AAA-Tech: [
+        show aaa servers,
+        show tech aaa, 
+        sh run | sec aaa,
+        show log | inc ERROR
+    ]
+
+    AAA-NonTech: [
+        show aaa servers,
+        sh run | sec aaa,
+    ]
+  
+    Dot1x: [
+        show access-session method dot1x detail,
+        show tech access-session,
+        show log | inc ERROR
+    ]
+
+    Lisp: [
+        show tech fabric,
+        show tech lisp,
+        show tech cef,
+        show log | inc ERROR
+    ]
+
+    Forwarding: [
+        show tech cef,
+        show tech fabric,
+        show tech lisp,
+        show log | inc ERROR
+    ]
+  
+    CTS: [
+        show tech cts,
+        show log | inc ERROR
+    ]
+#area and role based logs collection to take role/device specific logs
+areas1:
+    UNDERLAY: [
+        {   
+            role: ["ACCESS","BORDERNODE","EWLC"],
+            CLIS: [
+                show aaa servers,
+                show tech aaa, 
+                sh run | sec aaa,
+                show log | inc ERROR
+            ]
+        },
+        {   
+            role: ["EXTNODE"],
+            CLIS: [
+                show aaa servers,
+                sh run | sec aaa,
+                show log | inc ERROR
+            ]
+        },
+        {
+            role: ["WLC"],
+            CLIS: [
+                show sysinfo,
+                show route summary,
+                show snmpcommunity,
+                show snmptrap,
+                show snmpv3user,
+                show trapflags,
+                show snmpversion,
+                show stats switch summary,
+                show traplog
+            ]
+        }
+        
+    ]
+    TRAPS: [
+        {   
+            role: ["ACCESS","BORDERNODE","EWLC"],
+            CLIS: [
+                show aaa servers,
+                show tech aaa, 
+                sh run | sec aaa,
+                show log | inc ERROR
+            ]
+        },
+        {   
+            role: ["EXTNODE"],
+            CLIS: [
+                show aaa servers,
+                sh run | sec aaa,
+                show log | inc ERROR
+            ]
+        },
+        {
+            role: ["WLC"],
+            CLIS: [
+                show traplog
+            ]
+        }
+        
+    ]
+    TACACS: [
+        {   
+            role: ["ACCESS","BORDERNODE","EWLC"],
+            CLIS: [
+                show aaa servers,
+                show tech aaa, 
+                sh run | sec aaa,
+                show log | inc ERROR
+            ]
+        },
+        {   
+            role: ["EXTNODE"],
+            CLIS: [
+                show aaa servers,
+                sh run | sec aaa,
+                show log | inc ERROR
+            ]
+        },
+        {
+            role: ["WLC"],
+            CLIS: [
+                show tacacs acct statistics,
+                show tacacs summary,
+                show tacacs auth statistics
+            ]
+        }
+        
+    ]
+    MCAST: [
+        {   
+            role: ["ACCESS","BORDERNODE","EWLC"],
+            CLIS: [
+                show aaa servers,
+                show tech aaa, 
+                sh run | sec aaa,
+                show log | inc ERROR
+            ]
+        },
+        {   
+            role: ["EXTNODE"],
+            CLIS: [
+                show aaa servers,
+                sh run | sec aaa,
+                show log | inc ERROR
+            ]
+        },
+        {
+            role: ["WLC"],
+            CLIS: [
+                show route summary
+            ]
+        }
+        
+    ]
+    AAA: [
+        {   
+            role: ["ACCESS","BORDERNODE","EWLC"],
+            CLIS: [
+                show aaa servers,
+                show tech aaa, 
+                sh run | sec aaa,
+                show log | inc ERROR
+            ]
+        },
+        {   
+            role: ["EXTNODE"],
+            CLIS: [
+                show aaa servers,
+                sh run | sec aaa,
+                show log | inc ERROR
+            ]
+        },
+        {
+            role: ["WLC"],
+            CLIS: [
+                show radius summary,
+                show aaa auth,
+                show radius acct statistics,
+                show radius auth statistics
+            ]
+        }
+    ]
+    Lisp: [
+        {
+            role: ["ACCESS"],
+            CLIS: [
+                show tech fabric,
+                show tech lisp,
+                show tech cef,
+                show log | inc ERROR
+            ]
+        },
+        {
+            role: ["BORDERNODE"],
+            CLIS: [
+                show tech fabric,
+                show tech lisp,
+                show tech cef,
+                show log | inc ERROR
+            ]
+        },
+        {
+            role: ["WIRELESS-CONTROLLER"],
+            CLIS: [
+                show tech fabric,
+                show tech lisp,
+                show tech cef,
+                show log | inc ERROR
+            ]
+        }
+    ]
+    Rogue: [
+        {
+            role: ["EWLC"],
+            CLIS: []
+        },
+        {
+            role: ["WLC"],
+            CLIS: [
+                show rogue adhoc summary,
+                show rogue ignore-list,
+                show rogue rule detailed,
+                show rogue rule summary,
+                show rogue ap summary,
+                show rogue ap friendly summary,
+                show rogue ap malicious summary,
+                show rogue ap unclassified summary,
+                show rogue ap clients,
+                show rogue client summary,
+                show rogue rule summary
+            ]
+        }
+    ]
